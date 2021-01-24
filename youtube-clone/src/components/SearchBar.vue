@@ -1,5 +1,5 @@
 <template>
-  <div class="row m-4">
+  <div class="row my-4">
     <!-- <input type="text" v-on:input="onInput" /> -->
     <input type="text" @input="onInput" class="form-input col-9 m-auto" />
   </div>

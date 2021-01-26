@@ -1,4 +1,4 @@
-import api from "../../api/imgur";
+import api, { setToken } from "../../api/imgur";
 import qs from "qs";
 import { router } from "../../main";
 const state = {
@@ -24,6 +24,7 @@ const actions = {
   finalizeLogin: ({ commit }, hash) => {
     const callback = qs.parse(hash.replace("#", ""));
     commit("setToken", callback.access_token);
+    setToken(callback.access_token);
     window.localStorage.setItem("imgur_token", callback.access_token);
     router.push("/");
   },

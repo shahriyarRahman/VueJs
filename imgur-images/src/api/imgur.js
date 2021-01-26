@@ -3,25 +3,6 @@ import axios from "axios";
 const CLIENT_ID = "57debdff206caf7";
 const ROOT_URL = "https://api.imgur.com";
 
-// const axiosInstance = axios.create({
-//   baseURL: "https://api.imgur.com/3/account/me/images",
-// });
-// axiosInstance
-//   .request({
-//     url: `search`,
-//     method: "GET",
-//     params: {
-//       key: API_KEY,
-//       type: "video",
-//       part: "snippet",
-//       q: searchTerm,
-//     },
-//   })
-//   .then((response) => {
-//     this.videos = response.data.items;
-//   })
-//   .catch((err) => console.log(err));
-
 export default {
   login() {
     const queryString = {
@@ -37,5 +18,19 @@ export default {
         Authorization: `Bearer ${token}`,
       },
     });
+  },
+  upload(images, token) {
+    const promises = Array.from(images).map((image) => {
+      const formData = new FormData();
+      //to actually attach image reference key to actual image
+      formData.append("image", image);
+      return axios.post(`${ROOT_URL}/3/image`, formData, {
+        // headers
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    });
+    return Promise.all(promises);
   },
 };

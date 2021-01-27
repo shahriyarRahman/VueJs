@@ -1,4 +1,4 @@
-# imgur-images
+# boilerplate
 
 ## Project setup
 ```
